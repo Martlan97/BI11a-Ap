@@ -24,7 +24,7 @@ def calculate_gc_content(data_path):
         else:
             sys.exit("The file does not contain a valid header, quitting.")
 
-        for line in tqdm(csvReader, desc="Retrieving data", total=row_count - 1):
+        for line in tqdm(csvReader, desc="Calculating GC", total=row_count - 1):
             seq = line[nt_seq_index]
             if seq:
                 gc_content = get_gc_content(seq)
