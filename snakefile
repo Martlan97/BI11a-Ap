@@ -36,6 +36,14 @@ rule sort_by_pubmed:
     shell:
         "python ./scripts/sort_by_pubmed.py --input {input[0]} --output {output[0]}"
 
+rule cluster_pubmed:
+    input:
+        "./output/uniprot.csv"
+    output:
+        "./output/pubmed_clusters.csv"
+    shell:
+        "python ./scripts/cluster_pubmed.py --input {input[0]} --output {output[0]}"
+
 rule calculate_gc_content:
     input:
         "./output/sorted_by_pubmed.csv"
