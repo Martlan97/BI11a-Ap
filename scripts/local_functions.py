@@ -1,6 +1,12 @@
 import csv
+import os
 
 from tqdm import tqdm
+
+
+def build_folder_structure():
+    if not os.path.exists("./output/gc_plots/"):
+        os.makedirs("./output/gc_plots/")
 
 
 def count_lines(file):

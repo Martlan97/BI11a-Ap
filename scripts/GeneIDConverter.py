@@ -6,6 +6,8 @@ from local_functions import *
 
 
 def main():
+    build_folder_structure()
+
     args = parse_args()
     data, row_count = kegg_to_alt_id(args.input)
     write_to_csv(args.output, data, row_count)
