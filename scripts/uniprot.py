@@ -3,7 +3,7 @@ import sys
 import re
 
 from bioservices import UniProt
-from local_functions import *
+from local_functions.local_functions import *
 
 
 def main():

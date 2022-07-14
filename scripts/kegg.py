@@ -2,7 +2,7 @@ import argparse
 import sys
 
 from bioservices import KEGG
-from local_functions import *
+from local_functions.local_functions import *
 
 
 def main():

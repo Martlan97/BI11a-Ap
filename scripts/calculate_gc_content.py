@@ -1,7 +1,7 @@
 import argparse
 import sys
 
-from local_functions import *
+from local_functions.local_functions import *
 
 
 def main():
