@@ -36,6 +36,8 @@ def build_dictionary(csv_reader, pubmed_id_index, row_count):
         kegg_id = line[0]
         pubmed_ids = line[pubmed_id_index].split(";")
         for pubmed_id in pubmed_ids:
+            if pubmed_id == "":
+                pubmed_id = "No articles available"
             if pubmed_cluster.get(pubmed_id):
                 pubmed_cluster[pubmed_id].append(kegg_id)
             else:
