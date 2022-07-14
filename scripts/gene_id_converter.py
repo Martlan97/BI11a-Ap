@@ -6,8 +6,6 @@ from local_functions import *
 
 
 def main():
-    build_folder_structure()
-
     args = parse_args()
     data, row_count = kegg_to_alt_id(args.input)
     write_to_csv(args.output, data, row_count)
@@ -37,16 +35,16 @@ def kegg_to_alt_id(data_path):
 
 def get_alt_id(kegg_id):
     kegg = KEGG()
-    kegg_entry = kegg.get("lpl:{}".format(kegg_id))
-    data = kegg.parse(kegg_entry)
+    response = kegg.get("lpl:{}".format(kegg_id))
+    kegg_entry = kegg.parse(response)
 
     try:
-        uniprot = data["DBLINKS"]["UniProt"]
+        uniprot = kegg_entry["DBLINKS"]["UniProt"]
     except KeyError:
         uniprot = ""
 
     try:
-        NCBIProteinID = data["DBLINKS"]["NCBI-ProteinID"]
+        NCBIProteinID = kegg_entry["DBLINKS"]["NCBI-ProteinID"]
     except KeyError:
         NCBIProteinID = ""
 

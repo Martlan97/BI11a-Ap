@@ -1,8 +1,17 @@
+import errno
+import os
+
+try:
+    os.makedirs("./output/")
+except OSError as e:
+    if e.errno != errno.EEXIST:
+        raise
+
 rule all:
     input:
         "output/gc_content.csv",
         "output/pubmed_clusters.csv",
-        "output/gc_plots/"
+        "output/gc_plots"
 
 rule get_alt_ids:
     input:
@@ -10,7 +19,7 @@ rule get_alt_ids:
     output:
         "output/alternate_identifiers.csv"
     shell:
-        "python ./scripts/GeneIDConverter.py --input {input[0]} --output {output[0]}"
+        "python ./scripts/gene_id_converter.py --input {input[0]} --output {output[0]}"
 
 rule kegg:
     input:
@@ -56,6 +65,6 @@ rule plot_gc_content:
     input:
         "output/gc_content.csv"
     output:
-        directory("output/gc_plots/")
+        directory("output/gc_plots")
     shell:
         "Rscript ./scripts/plot_GC.R --input {input[0]} --output {output[0]}"

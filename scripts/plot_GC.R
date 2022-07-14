@@ -9,7 +9,7 @@ p <- add_argument(parse = p,
 p <- add_argument(parse = p,
                   arg = "--output",
                   help = "(absolute) path for directory where the plots should be put.",
-                  default = "./output/gc_plots/")
+                  default = "./output/gc_plots")
 argv <- parse_args(p)
 
 
@@ -17,7 +17,7 @@ plot_a_plot <- function(file_path, kegg_id, gc_content, gc_content_subsections) 
   seq_length <- length(gc_content_subsections)*10
   x <- seq(10, seq_length, by = 10)
   
-  png(paste0(file_path, kegg_id, ".png", collapse = NULL),
+  png(paste0(file_path, "/", kegg_id, ".png", collapse = NULL),
       height = 480, width = seq_length)
   
   plot(x, gc_content_subsections, type = "o",
@@ -31,6 +31,9 @@ plot_a_plot <- function(file_path, kegg_id, gc_content, gc_content_subsections) 
   dev.off()
 }
 
+if (!file.exists(argv$output)){
+  dir.create(argv$output)
+}
 
 df <- as.data.frame(fread(file = argv$input, sep = "\t", header = TRUE))
 df <- df[c("KEGG_ID", "gc_content", "gc_content_subsections")]
