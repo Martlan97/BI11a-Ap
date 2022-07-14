@@ -58,5 +58,44 @@ python path/to/{script}.py --input path/to/{inputfile}.csv --output path/to/{out
 Rscript path/to/plot_GC.R --input path/to/{inputfile}.csv --output path/to/{outputfolder}
 ```
 ## III - Workflow
-![Workflow](https://user-images.githubusercontent.com/Martlan97/BI11a_Ap/main/.github/images/dag.svg)
 
+![Workflow](https://raw.githubusercontent.com/Martlan97/BI11a-Ap/main/.github/images/dag.svg?token=GHSAT0AAAAAABWR6BBYSTSX6TEKZCJYGI56YWQKRXA)
+
+## IV - Functions
+|             | gene_id_converter.py                                                                       |
+|-------------|:-------------------------------------------------------------------------------------------|
+| Description | Get UniProt and NCBI protein identifiers for given gene                                    |
+| Returns     | .csv file containing the original input with the retrieved IDs appended in two new columns |
+
+|             | kegg.py                                                                                     |
+|-------------|:--------------------------------------------------------------------------------------------|
+| Description | Get NT sequence and pathways for given gene                                                 |
+| Returns     | .csv file containing the original input with the retrieved data appended in two new columns |
+
+|             | uniprot.py                                                                                  |
+|-------------|:--------------------------------------------------------------------------------------------|
+| Description | Get function and PubMed identifiers for given gene                                          |
+| Returns     | .csv file containing the original input with the retrieved data appended in two new columns |
+
+|             | sorted_by_pubmed.py                                                               |
+|-------------|:----------------------------------------------------------------------------------|
+| Description | Sort the the input file in descending order by the number PubMed IDs of each gene |
+| Returns     | Sorted .csv file                                                                  |
+
+|             | cluster_pubmed.py                                        |
+|-------------|:---------------------------------------------------------|
+| Description | Creates a list of genes per PubMed ID that share that ID |
+| Returns     | .csv with PubMed IDs and their associated KEGG IDs       |
+
+|             | calculate_gc_content.py                                                              |
+|-------------|:-------------------------------------------------------------------------------------|
+| Description | Calculates the total and windowed GC content of the NT sequence of each gene         |
+| Returns     | .csv file containing the original input with the GC data appended in two new columns |
+
+|             | plot_GC.R                                                   |
+|-------------|:------------------------------------------------------------|
+| Description | Plot the GC content of each gene                            |
+| Returns     | .png file for each gene containing a plot of the GC content |
+
+## V - Credits
+Martijn Landman
