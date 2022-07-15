@@ -1,5 +1,5 @@
-./output/*.csv
-./output/gc_plots/*
+results/*.csv
+results/gc_plots/*
 .snakemake
 
 # Byte-compiled / optimized / DLL files

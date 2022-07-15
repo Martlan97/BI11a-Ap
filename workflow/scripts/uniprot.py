@@ -69,12 +69,12 @@ def parse_args():
     parser.add_argument("--input",
                         type=str,
                         required=False,
-                        default="./output/kegg.csv",
+                        default="./results/kegg.csv",
                         help="(absolute) path for file with UniProt identifiers. First row must be a header.")
     parser.add_argument("--output",
                         type=str,
                         required=False,
-                        default="./output/uniprot.csv",
+                        default="./results/uniprot.csv",
                         help="(absolute) path for the output file.")
 
     args = parser.parse_args()

@@ -1,0 +1,70 @@
+import errno
+import os
+
+try:
+    os.makedirs("./results/")
+except OSError as e:
+    if e.errno != errno.EEXIST:
+        raise
+
+rule all:
+    input:
+        "results/gc_content.csv",
+        "results/pubmed_clusters.csv",
+        "results/gc_plots"
+
+rule get_alt_ids:
+    input:
+        "data/test.txt"
+    output:
+        "results/alternate_identifiers.csv"
+    shell:
+        "python ./workflow/scripts/gene_id_converter.py --input {input[0]} --output {output[0]}"
+
+rule kegg:
+    input:
+        "results/alternate_identifiers.csv"
+    output:
+        "results/kegg.csv"
+    shell:
+        "python ./workflow/scripts/kegg.py --input {input[0]} --output {output[0]}"
+
+rule uniprot:
+    input:
+        "results/kegg.csv"
+    output:
+        "results/uniprot.csv"
+    shell:
+        "python ./workflow/scripts/uniprot.py --input {input[0]} --output {output[0]}"
+
+rule sort_by_pubmed:
+    input:
+        "results/uniprot.csv"
+    output:
+        "results/sorted_by_pubmed.csv"
+    shell:
+        "python ./workflow/scripts/sort_by_pubmed.py --input {input[0]} --output {output[0]}"
+
+rule cluster_pubmed:
+    input:
+        "results/uniprot.csv"
+    output:
+        "results/pubmed_clusters.csv"
+    shell:
+        "python ./workflow/scripts/cluster_pubmed.py --input {input[0]} --output {output[0]}"
+
+rule calculate_gc_content:
+    input:
+        "results/sorted_by_pubmed.csv"
+    output:
+        "results/gc_content.csv"
+    shell:
+        "python ./workflow/scripts/calculate_gc_content.py --input {input[0]} --output {output[0]}"
+
+rule plot_gc_content:
+    input:
+        "results/gc_content.csv"
+    output:
+        directory("results/gc_plots")
+    shell:
+        "Rscript ./workflow/scripts/plot_GC.R --input {input[0]} --output {output[0]}"

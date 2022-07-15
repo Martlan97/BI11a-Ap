@@ -56,12 +56,12 @@ def parse_args():
     parser.add_argument("--input",
                         type=str,
                         required=False,
-                        default="./output/sorted_by_pubmed.csv",
+                        default="./results/sorted_by_pubmed.csv",
                         help="(absolute) path for file with NT sequences. First row must be a header.")
     parser.add_argument("--output",
                         type=str,
                         required=False,
-                        default="./output/gc_content.csv",
+                        default="./results/gc_content.csv",
                         help="(absolute) path for the output file.")
 
     args = parser.parse_args()

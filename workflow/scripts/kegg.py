@@ -60,13 +60,13 @@ def parse_args():
     parser.add_argument("--input",
                         type=str,
                         required=False,
-                        default="./output/alternate_identifiers.csv",
+                        default="./results/alternate_identifiers.csv",
                         help="(absolute) path for file with KEGG identifiers. First row must be a header and first "
                              "column must contain KEGG identifiers.")
     parser.add_argument("--output",
                         type=str,
                         required=False,
-                        default="./output/kegg.csv",
+                        default="./results/kegg.csv",
                         help="(absolute) path for the output file.")
 
     args = parser.parse_args()

@@ -5,11 +5,11 @@ p <- arg_parser("create plots for GC content")
 p <- add_argument(parse = p,
                   arg = "--input",
                   help = "(absolute) path for file with GC content of sequences. First row must be a header.",
-                  default = "./output/gc_content.csv")
+                  default = "./results/gc_content.csv")
 p <- add_argument(parse = p,
                   arg = "--output",
                   help = "(absolute) path for directory where the plots should be put.",
-                  default = "./output/gc_plots")
+                  default = "./results/gc_plots")
 argv <- parse_args(p)
 
 
