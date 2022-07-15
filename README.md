@@ -35,7 +35,7 @@ The container can be exited from the containers commandline with:
 ```commandline
 exit 13
 ```
-To reconnect to the container first start it if it isn't already running, then attach it:
+To reconnect to the container, first start it if it isn't already running, then attach it:
 ```commandline
 docker container start {container ID}
 docker container attach {container ID}
@@ -70,13 +70,13 @@ The entire workflow can be executed with the 'snakemake' command from within the
 ```commandline
 snakemake
 ```
-To only run a part of the workflow specify the desired output file(s) or folder use:
+To only run a part of the workflow specify the desired output file(s) or folder:
 ```commandline
 snakemake results/{filename}.csv
 
 snakemake results/gc_plots
 ```
-Alternatively the scripts can also be independently run directly from the commandline. All scripts have the same optional ```--input``` and ```--output``` options.
+Alternatively the scripts can also be independently run directly from the commandline. All scripts have the same optional ```--input``` and ```--output``` parameters:
 ```commandline
 python workflow/scripts/{script}.py --input path/to/{inputfile}.csv --output path/to/{outputfile}.csv
 
