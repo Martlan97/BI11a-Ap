@@ -2,6 +2,7 @@
 A workflow for the analysis of Lactobacillus plantarum.
 
 ## I - Installation
+### Ia - Local version
 In order to execute the workflow make sure the following dependencies are installed:
 
 Software:
@@ -15,6 +16,30 @@ R libraries (installed automatically if not already present):
 Python modules:
 - bioservices
 - tqdm
+
+### Ib - Docker container
+The workflow can also be used with the image available on the [docker hub](https://hub.docker.com/r/martlan/bi11a-ap).
+First pull the image with:
+```commandline
+docker pull martlan/bi11a-ap
+```
+Then run the container with:
+```commandline
+docker run -it martlan/bi11a-ap
+```
+Optionally add a name to the container for easier reference with:
+```commandline
+docker run --name {container name} -it martlan/bi11a-ap
+```
+The container can be exited from the containers commandline with:
+```commandline
+exit 13
+```
+To reconnect to the container first start it if it isn't already running, then attach it:
+```commandline
+docker container start {container ID}
+docker container attach {container ID}
+```
 
 ## II - Usage
 This workflow can be used to gather and generate data for (KEGG) genes:
@@ -41,17 +66,17 @@ The files in the 'data' folder where used while developing this workflow, other 
 | ...       | ...         | ...           |
 
 ### IIb - Running the workflow
-The entire workflow can be executed with the 'snakemake' command from within the BI11a-Ap directory.
+The entire workflow can be executed with the 'snakemake' command from within the BI11a-Ap directory:
 ```commandline
 snakemake
 ```
-To only run a part of the workflow specify the desired output file(s) or folder.
+To only run a part of the workflow specify the desired output file(s) or folder use:
 ```commandline
 snakemake results/{filename}.csv
 
 snakemake results/gc_plots
 ```
-Alternatively the python can also be run directly from the commandline. All scripts have the same optional ```--input``` and ```--output``` options.
+Alternatively the scripts can also be independently run directly from the commandline. All scripts have the same optional ```--input``` and ```--output``` options.
 ```commandline
 python workflow/scripts/{script}.py --input path/to/{inputfile}.csv --output path/to/{outputfile}.csv
 
