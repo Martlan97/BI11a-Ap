@@ -41,25 +41,25 @@ The files in the 'data' folder where used while developing this workflow, other 
 | ...       | ...         | ...           |
 
 ### IIb - Running the workflow
-The entire workflow can be executed with the 'snakemake' command.
+The entire workflow can be executed with the 'snakemake' command from within the BI11a-Ap directory.
 ```commandline
 snakemake
 ```
 To only run a part of the workflow specify the desired output file(s) or folder.
 ```commandline
-snakemake output/{filename}.csv
+snakemake results/{filename}.csv
 
-snakemake output/gc_plots
+snakemake results/gc_plots
 ```
 Alternatively the python can also be run directly from the commandline. All scripts have the same optional ```--input``` and ```--output``` options.
 ```commandline
-python path/to/{script}.py --input path/to/{inputfile}.csv --output path/to/{outputfile}.csv
+python workflow/scripts/{script}.py --input path/to/{inputfile}.csv --output path/to/{outputfile}.csv
 
-Rscript path/to/plot_GC.R --input path/to/{inputfile}.csv --output path/to/{outputfolder}
+Rscript workflow/scripts/plot_GC.R --input path/to/{inputfile}.csv --output path/to/{outputfolder}
 ```
 ## III - Workflow
 
-![Workflow](https://raw.githubusercontent.com/Martlan97/BI11a-Ap/main/.github/images/dag.svg?token=GHSAT0AAAAAABWR6BBYSTSX6TEKZCJYGI56YWQKRXA)
+![Workflow](.github/images/dag.svg?raw=true)
 
 ## IV - Functions
 |             | gene_id_converter.py                                                                       |
