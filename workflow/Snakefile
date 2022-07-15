@@ -15,7 +15,7 @@ rule all:
 
 rule get_alt_ids:
     input:
-        "data/test.txt"
+        "data/RNA-Seq-counts.txt"
     output:
         "results/alternate_identifiers.csv"
     shell:
