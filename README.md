@@ -6,7 +6,7 @@ In order to execute the workflow make sure the following dependencies are instal
 
 Software:
 - python version 3.9.10
-- R version 3.6.1
+- R version 3.6.3
 
 R libraries (installed automatically if not already present):
 - argparser
