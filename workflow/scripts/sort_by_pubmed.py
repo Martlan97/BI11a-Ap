@@ -11,6 +11,16 @@ def main():
 
 
 def sort(data_path):
+    """
+    Function that parses a tabular file for PubMed identifiers and sorts the rows by descending order of the number of
+    PubMed identifiers of each gene.
+    :param data_path:
+    text or byte string giving the name (and path) of the tabular file containing PubMed identifiers.
+    :return:
+    nested list [[],[],etc] containing the contents of the input file with the inner lists being sorted from most PubMed
+    identifiers to least (excluding the header which remains the first inner list in the outer list).
+    Integer representing the number of rows in the input file.
+    """
     data = []
     to_sort = []
     with open(data_path, mode="r") as file:
@@ -44,6 +54,13 @@ def sort(data_path):
 
 
 def parse_args():
+    """
+    Function that parses commandline strings. Has an --input and --output argument for an input file and output file
+    respectively. The input file must be tabular with a header row and a column called 'PubMed_ID' containing valid
+    PubMed identifiers (cells can be left empty).
+    :return:
+    Argument parser object with the arguments 'input' and 'output'.
+    """
     parser = argparse.ArgumentParser(description="Sort the genes by the number of associated PubMed identifiers",
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
 

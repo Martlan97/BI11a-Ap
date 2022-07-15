@@ -13,6 +13,16 @@ def main():
 
 
 def uniprot(data_path):
+    """
+    Function that parses a tabular file for UniProt IDs and appends the corresponding function and PubMed identifiers to
+    the rows in the columns 'gene_function' and 'PubMed_ID'.
+    :param data_path:
+    text or byte string giving the name (and path) of the tabular file containing UniProt identifiers.
+    :return:
+    nested list [[],[],etc] containing the contents of the input file along with the acquired gene functions and
+    PubMed identifiers.
+    Integer representing the number of rows in the input file.
+    """
     data = []
     with open(data_path, mode="r") as file:
         row_count = count_lines(file)
@@ -38,12 +48,19 @@ def uniprot(data_path):
     return data, row_count
 
 
-regex_function = re.compile("(?<=CC   -!- FUNCTION: )(?s:.*?)(?=CC   -!-)")
-regex_pubmed = re.compile("(?<=RX   PubMed=)(\\d*)(?=;)")
-
-
 def get_uniprot_data(uniprot_id):
+    """
+    Function that uses a UniProt ID to query the Uniprot database for the corresponding entry from which it then takes
+    the function and PubMed identifiers (if available) and returns them.
+    :param uniprot_id:
+    string giving the identifier of a UniProt database entry.
+    :return:
+    a string giving the gene function and a list containing the PubMed identifiers.
+    """
     data = UniProt().retrieve("{0}".format(uniprot_id), frmt="txt")
+
+    regex_function = re.compile("(?<=CC   -!- FUNCTION: )(?s:.*?)(?=CC   -!-)")
+    regex_pubmed = re.compile("(?<=RX   PubMed=)(\\d*)(?=;)")
 
     try:
         pubmed_ids = re.findall(regex_pubmed, data)
@@ -63,6 +80,13 @@ def get_uniprot_data(uniprot_id):
 
 
 def parse_args():
+    """
+    Function that parses commandline strings. Has an --input and --output argument for an input file and output file
+    respectively. The input file must be tabular with a header row and a column called 'UniProt_ID' containing valid
+    UniProt identifiers (cells can be left empty).
+    :return:
+    Argument parser object with the arguments 'input' and 'output'.
+    """
     parser = argparse.ArgumentParser(description="Get gene functionality and PubMed identifiers.",
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
 

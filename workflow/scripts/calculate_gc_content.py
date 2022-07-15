@@ -11,6 +11,15 @@ def main():
 
 
 def calculate_gc_content(data_path):
+    """
+    Function that parses a tabular file for nucleotide sequences and appends the calculated overall GC percentage and
+    windowed GC percentages of the sequences to the rows in the columns 'gc_content' and 'gc_content_subsections'.
+    :param data_path:
+    text or byte string giving the name (and path) of the tabular file containing nucleotide sequences.
+    :return:
+    nested list [[],[],etc] containing the contents of the input file along with the acquired GC percentages.
+    Integer representing the number of rows in the input file.
+    """
     data = []
     with open(data_path, mode="r") as file:
         row_count = count_lines(file)
@@ -38,6 +47,16 @@ def calculate_gc_content(data_path):
 
 
 def get_gc_content_subsection(seq, window=10):
+    """
+    Function that calculates the windowed GC percentages of a nucleotide sequence by dividing the sequence in
+    subsections and then calling get_gc_content() for each subsection and storing the results in a list.
+    :param seq:
+    string representing a nucleotide sequence.
+    :param window:
+    integer representing the size the subsections in which the supplied sequence will be divided.
+    :return:
+    list of integers where each integer represents the GC percentage of a subsection of the supplied sequence.
+    """
     result = []
     for i in range(0, len(seq) - window + 1, window):
         subseq = seq[i:i + window]
@@ -46,10 +65,26 @@ def get_gc_content_subsection(seq, window=10):
 
 
 def get_gc_content(seq):
+    """
+    Function that calculates the overall GC percentage of a nucleotide sequence by counting the number of 'c' and 'g'
+    characters in the input string and then dividing this number by the total number of characters in the string before
+    multiplying it by a hundred.
+    :param seq:
+    string representing a nucleotide sequence.
+    :return:
+    integer representing the overall GC percentage of the supplied sequence.
+    """
     return round((seq.count("c") + seq.count("g")) / len(seq) * 100)
 
 
 def parse_args():
+    """
+    Function that parses commandline strings. Has an --input and --output argument for an input file and output file
+    respectively. The input file must be tabular with a header row and column called 'nt_seq' containing valid
+    nucleotide sequences (cells can be left empty).
+    :return:
+    Argument parser object with the arguments 'input' and 'output'.
+    """
     parser = argparse.ArgumentParser(description="Calculate and visualize the GC content of (a) sequence(s).",
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
 
